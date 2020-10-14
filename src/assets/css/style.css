@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.communication {
+    @apply .border-2 .border-indigo-600 .p-4 .m-4
+
+} 
+
+button {
+    @apply .bg-white .text-gray-900 .border .border-gray-900 .p-4 .rounded .block .w-full;
+    /* hover */
+}
+button:hover {
+    @apply bg-gray-900 text-white;
+}
+
+@screen lg {
+    button {
+        @apply inline-block w-auto;
+    }
+}
