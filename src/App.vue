@@ -23,7 +23,7 @@
           <td class="border px-4 py-2">{{ character.description }}</td>
         </tr>
         
-      </tbody>
+      </tbody> 
     </table>
     </div>
   </section>
