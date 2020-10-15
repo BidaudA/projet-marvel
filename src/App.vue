@@ -7,30 +7,25 @@
   </section>
 
   <section v-else>
-    
-    <table class="table-fixed">
+    <div v-if="loading">Loading...</div>
+    <div v-else>
+    <table class="table-auto">
       <thead>
         <tr>
-          <th >ID</th>
-          <th>Nom</th>
+          <th class="px-4 py-2">Nom</th>
+          <th class="px-4 py-2">Description</th>
         </tr>
       </thead>
       <tbody>
-        <div v-if="loading">Loading...</div>
-    
-        <div v-else v-for="characters in info" :key="characters.results">
-        <tr v-for="character in characters.results" :key="character.results">
-          <td class="border">{{ character.id }}</td>
-          <td class="border">{{ character.name }}</td>
+        
+        <tr v-for="character in info.data.results" :key="character.id">
+          <td class="border px-4 py-2">{{ character.name }}</td>
+          <td class="border px-4 py-2">{{ character.description }}</td>
         </tr>
-        </div>
+        
       </tbody>
     </table>
-
-      
-      
-    
-
+    </div>
   </section>
 
   
@@ -66,10 +61,10 @@ export default {
     
   },
   mounted() {
-    axios.get('https://gateway.marvel.com:443/v1/public/characters?apikey=55dd7a6256658f33a00034a161f9c8f7&ts=1&hash=8e821d4269b2d7f35e61d11ecd39ff92')
+    axios.get('https://gateway.marvel.com:443/v1/public/characters?limit=99&apikey=55dd7a6256658f33a00034a161f9c8f7&ts=1&hash=8e821d4269b2d7f35e61d11ecd39ff92')
       .then(response => {
         this.info = response.data
-        
+        console.log(this.info.data)
     })
     .catch(error => {
       console.log(error)
