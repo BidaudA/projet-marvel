@@ -14,13 +14,16 @@
         <tr>
           <th class="px-4 py-2">Nom</th>
           <th class="px-4 py-2">Description</th>
+          <th class="px-4 py-2">Image</th>
         </tr>
       </thead>
       <tbody>
-        
         <tr v-for="character in info.data.results" :key="character.id">
           <td class="border px-4 py-2">{{ character.name }}</td>
           <td class="border px-4 py-2">{{ character.description }}</td>
+          
+          <td class="border px-4 py-2"><img :src="path+'character.thumbnail.path'.jpg"></td>
+          
         </tr>
         
       </tbody> 
@@ -60,17 +63,18 @@ export default {
   computed: {
     
   },
-  mounted() {
-    axios.get('https://gateway.marvel.com:443/v1/public/characters?limit=99&apikey=55dd7a6256658f33a00034a161f9c8f7&ts=1&hash=8e821d4269b2d7f35e61d11ecd39ff92')
-      .then(response => {
-        this.info = response.data
-        console.log(this.info.data)
-    })
-    .catch(error => {
+  async mounted() {
+    try {
+      const response = await axios.get('https://gateway.marvel.com:443/v1/public/characters?limit=99&apikey=55dd7a6256658f33a00034a161f9c8f7&ts=1&hash=8e821d4269b2d7f35e61d11ecd39ff92')
+      this.info = response.data
+      console.log(this.info.data)
+    } catch {
       console.log(error)
       this.errored = true
-    })
-    .finally(() => this.loading = false)
+    
+    } finally {
+      this.loading = false
+    }
   }
 }
 </script>
